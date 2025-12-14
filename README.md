@@ -15,8 +15,6 @@ The UI lets users pick one of the following MCP tools and run it:
   - S3 static website (UI)
   - API Gateway HTTP API (proxy) via `/api/*`
 - API Gateway (HTTP API) -> Lambda (Python)
-- Optional: WAFv2 IP allowlist for CloudFront
-- Optional: DynamoDB TTL cache for MCP responses
 
 ```mermaid
 flowchart LR
@@ -79,11 +77,13 @@ flowchart LR
 
 ## Endpoints
 
-- POST /api/search      -> aws___search_documentation (limit is fixed to 10)
-- POST /api/read        -> aws___read_documentation
-- POST /api/recommend   -> aws___recommend
-- POST /api/list_regions ->
-- POST /api/get_regional_availavility ->
+| Endpoint | MCP Tool | 機能概要（日本語要約） |
+| ---| ---| --- |
+| `POST /api/search` | `aws___search_documentation` | Searches the entire AWS official documentation and returns up to **10** highly relevant results. You can narrow the search scope by specifying a topic. |
+| `POST /api/read` | `aws___read_documentation` | Retrieves the content of the specified AWS documentation URL and returns it converted into readable Markdown format. |
+| `POST /api/recommend` | `aws___recommend` | Based on the specified AWS documentation page, it retrieves highly relevant recommended documentation. |
+| `POST /api/list_regions` | `aws___list_regions` | Retrieves a list of all regions provided by AWS and returns the region codes and names. |
+| `POST /api/get_regional_availavility` | `aws___get_regional_availability` | Determines whether AWS services, APIs, and CloudFormation resources are **available** in the specified region and returns their availability status. |
 
 ## Deploy using AWS SAM
 
@@ -138,17 +138,17 @@ You can access CloudFront using its DNS name without registering a domain.
 If you can register your domain in route 53 public host zone.  
 Recommend Alias Record.
 
-## Debug
+## How to debug
 
 ### Check the connectivity using the Inspector
 
 `$ npx @modelcontextprotocol/inspector https://knowledge-mcp.global.api.aws`
 
-- After run, Use Transport Type is Streamable HTTP  
-- URL is <https://knowledge-mcp.global.api.aws>  
-- Turn on connect  
+- After run, Use Transport Type is Streamable HTTP.  
+- URL is <https://knowledge-mcp.global.api.aws>.  
+- Turn on connect.  
 
-## How to debug using curl
+### How to debug using curl
 
 - search_documentation
 
