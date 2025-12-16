@@ -13,7 +13,7 @@ The UI lets users pick one of the following MCP tools and run it:
 
 - CloudFront (optional but included) with two origins:
   - S3 static website (UI)
-  - API Gateway HTTP API (proxy) via `/api/*`
+  - API Gateway HTTP API via `/api/*`
 - API Gateway (HTTP API) -> Lambda (Python)
 
 ```mermaid
@@ -32,7 +32,7 @@ flowchart LR
         API[/HTTP API/]
     end
 
-    subgraph Lambda["AWS Lambda (Proxy)"]
+    subgraph Lambda["AWS Lambda"]
         SearchFn["SearchFunction<br/>aws___search_documentation"]
         ReadFn["ReadFunction<br/>aws___read_documentation"]
         RecommendFn["RecommendFunction<br/>aws___recommend"]
