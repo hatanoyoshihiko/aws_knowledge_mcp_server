@@ -97,14 +97,11 @@ $ sam deploy \
   --capabilities CAPABILITY_IAM \
   --profile YOUR_AWS_PROFILE \
   --parameter-overrides \
-    EnableWaf=false \
-    EnableCache=true \
     OriginVerifySecret="YOUR_SECRET_VALUE"
 ```
 
 **Parameters you will be asked:**
 
-- `EnableCache` (true/false)
 - `OriginVerifySecret` (optional): if set, the UI must send `X-Shared-Token` header
 
 **After deploy, SAM outputs:**
